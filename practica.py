@@ -43,8 +43,11 @@ def extraer_iniciales(lista_personajes,nombre_h:str):
         heroes=nombre_heroe.split()
 
         for nombre in heroes:
-            if nombre.lower() =='the' in heroes:
-                heroes.remove("the")
+            if nombre.lower() == 'the' : #CUANDO COLOCO VARIACIONES DE THE SE PASA UNA
+                heroes.remove(nombre)
+            #print(heroes)  
+        
+            
                 
         for iniciales in heroes:
             abreviado += iniciales[0].upper()+'.'
@@ -54,7 +57,35 @@ def extraer_iniciales(lista_personajes,nombre_h:str):
     else:
         return "N/A"
         
-abreviatura=extraer_iniciales(lista_personajes,"efren david castaneda-soto in the python road")
-print(abreviatura)
+"""
+1.2. Crear la función ‘definir_iniciales_nombre’ la cual recibirá como
+parámetro:
+● heroe: un diccionario con los datos del personaje
 
-print(bool("abc"))
+La función deberá agregar una nueva clave al diccionario recibido como
+parámetro. La clave se deberá llamar ‘iniciales’ y su valor será el obtenido de
+llamar a la función ‘extraer_iniciales’
+La función deberá validar:
+● Que el dato recibido sea del tipo diccionario
+● Que el diccionario contengan la clave ‘nombre’
+En caso de encontrar algún error retornar False, caso contrario retornar True
+
+"""
+
+
+def definir_iniciales_nombre(heroes:dict,clave:str):
+    
+    if type(heroes) != dict:
+        print("El argumento no es un diccionario")
+    elif "nombre" not in heroes:
+        print("La clave nombre no se encontro en el diccionario")
+    else:
+        heroes[clave]=extraer_iniciales(lista_personajes,heroes["nombre"])
+    print(heroes)
+
+definir_iniciales_nombre(lista_personajes[0],"Iniciales")
+    
+
+
+
+
