@@ -184,3 +184,96 @@ En caso de no pasar las validaciones retornar ‘N/A’. En caso de verificarse
 correctamente retornar el código generado
 
 """
+
+def generar_codigo_heroe(id_heroe:int,genero_heroe:str):
+    codigo=""
+    
+    
+    if genero_heroe.upper() not in ["M","NB","F"]:
+        return "N/A"
+    elif type(id_heroe) != int  :
+        return "N/A"
+    elif len(str(id_heroe))>8:  # puede ser 7 tambien "NB"
+        return "N/A"
+    else:
+        if genero_heroe.upper()=="NB":
+            codigo=f"{genero_heroe.upper()}-{str(id_heroe).zfill(7)}" #consultar mejor forma
+            codigo=codigo[:10]
+            print(codigo)
+            return codigo
+        else:
+            codigo=f"{genero_heroe.upper()}-{str(id_heroe).zfill(8)}" #consultar mejor forma
+            codigo=codigo[:10]
+            print(codigo)
+            return codigo
+
+    
+#generar_codigo_heroe(1234567,"NB")
+
+
+"""
+2.2. Crear la función ‘agregar_codigo_heroe’ la cual recibirá como
+parámetro:
+● heroe: un diccionario con los datos del personaje
+● id_heroe: un entero que representa el identificador del héroe.
+○ NOTA: el valor de id_heroe lo vamos a generar recién el punto
+2.3. Para probar la función podes pasarle cualquier entero
+La función deberá agregar una nueva clave llamada ‘codigo_heroe’ al
+diccionario ‘heroe’ recibido como parámetro y asignarle como valor un código
+utilizando la función ‘generar_codigo_heroe’
+
+La función deberá validar:
+● Que el diccionario recibido como parámetro no se encuentre vacío.
+● Que el código recibido mediante generar_codigo_heroe tenga
+exactamente 10 caracteres
+En caso de pasar las validaciones correctamente la función deberá retornar
+True, en caso de encontrarse un error retornar False
+
+"""
+def agregar_codigo_heroe(heroe:dict,id_heroe:int)-> bool:
+    if not heroe:
+        print("diccionario vacio")
+        return False
+    
+    if generar_codigo_heroe(id_heroe,"M")=="N/A":
+        print("supera 10 caracteres")
+        return False
+    else:
+        heroe["codigo_heroe"]=generar_codigo_heroe(id_heroe,"NB") #Error debido a la funcion que necesita | funcion anterior
+        print(heroe)
+        return True
+
+agregar_codigo_heroe(lista_personajes[0],12345678)
+
+
+
+
+# 2.3. Crear la función ‘stark_generar_codigos_heroes’ la cual recibirá como
+# parámetro:
+# ● lista_heroes: la lista de personajes
+# La función deberá iterar la lista de personajes y agregarle el código a cada
+# uno de los personajes.
+# El código del héroe (id_heore) surge de la posición del mismo dentro de la
+# lista_heroes (comenzando por el 1).
+# Reutilizar la función agregar_codigo_heroe pasándole como argumentos el
+# héroe que se está iterando y el id_heroe
+# Una vez finalizado imprimir por pantalla un mensaje como el siguiente:
+# (## representa la cantidad de códigos generados):
+# Se asignaron ## códigos
+# * El código del primer héroe es: M-00000001
+# * El código del del último héroe es: M-00001224
+# La función deberá validar::
+# ● La lista contenga al menos un elemento
+# ● Todos los elementos de la lista sean del tipo diccionario
+
+# ● Todos los elementos contengan la clave ‘genero’
+# En caso de encontrar algún error, informar por pantalla: ‘El origen de datos no
+# contiene el formato correcto’
+# La función no retorna ningún valor.
+
+def stark_generar_codigos_heroes(lista:list):
+    for heroe in lista:
+        id_heroe=lista.index(heroe)+1
+        print(id_heroe)
+        
+stark_generar_codigos_heroes(lista_personajes)
